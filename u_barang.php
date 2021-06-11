@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -58,13 +58,35 @@
                   <input type="text" class="form-control" value="<?=$row['nama_barang'];?>" name="nama_barang" placeholder="Masukan Nama Barang.." required>
                 </div>
               </div>
+                <div class="form-group row">
+                <label for="volume_brg" class="col-sm-2 col-form-label">Volume</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" value="<?=$row['volume_brg'];?>" name="volume_brg" placeholder="Masukkan Volume Barang.." required>
+                </div>
               </div>
+                <div class="form-group row">
+                <label for="date_in" class="col-sm-2 col-form-label">Tanggal Masuk</label>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control" value="<?=$row['date_in'];?>" name="date_in" required>
+                </div>
+              </div>              
               <div class="form-group row">
                 <label for="tahun_perolehan" class="col-sm-2 col-form-label">Tahun Perolehan</label>
                 <div class="col-sm-6">
                   <input type="number" class="form-control" value="<?=$row['tahun_perolehan'];?>" name="tahun_perolehan" required>
                 </div>
               </div>
+              <!-- <div class="form-group row">
+                <label for="harga" class="col-sm-2 col-form-label">Harga Barang</label>
+                <div class="col-sm-6">
+                  <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Rp.</span>
+                  </div>
+                  <input type="number" name="harga" class="form-control" value="<?=$row['harga'];?>" required>
+                </div>
+                </div>
+              </div> -->
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
@@ -88,4 +110,4 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+  <!-- /.content-wrapper

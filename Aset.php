@@ -16,6 +16,7 @@ class Aset extends CI_Controller {
 		$this->load->model('ModelBarang','mb');
 		$this->load->model('ModelLokasi','ml');
 		$this->load->model('ModelKategori','mk');
+		// $this->load->model('ModelStock','ms');
 
 		//load library
 		$this->load->library('ciqrcode');
@@ -24,7 +25,7 @@ class Aset extends CI_Controller {
 
 	public function index()
 	{		
-		$data = array(
+			$data = array(
 			'title' => 'Aset Berwujud',
 			'active_menu_open' => 'menu-open',
 			'active_menu_aset' => 'active',
@@ -39,6 +40,8 @@ class Aset extends CI_Controller {
 
 	public function tambahAset()
 	{
+		$id_kategori = $this->input->post('id_kategori');
+		
 		$data = array(
 			'title' => 'Aset Berwujud',
 			'active_menu_open' => 'menu-open',
@@ -46,8 +49,10 @@ class Aset extends CI_Controller {
 			'active_menu_wujud' => 'active',
 			'aset' => $this->ma->getAsetWujud(),
 			'brg' => $this->mb->getDataBarang(),
+			'nbrg' => $this->mb->getBarangKategori($id_kategori),
 			'lokasi' => $this->ml->getLokasi()
 		);
+
 		$this->load->view('layouts/header',$data);
 		$this->load->view('aset/c_wujud',$data);
 		$this->load->view('layouts/footer');
@@ -55,12 +60,15 @@ class Aset extends CI_Controller {
 
 	public function simpanAset()
 	{
+		
 		$this->form_validation->set_rules('kode_aset','Kode Aset','required|trim|is_unique[asets.kode_aset]',
 			array(
 				'required'=>"<p>Username tidak boleh kosong</p>",
 				'is_unique'=>"<p>Kode Aset sudah digunakan</p>",
 			)
+
 		);
+
 
 		if ($this->form_validation->run() != FALSE) {
 			$generate = $this->input->post('generate');
@@ -93,8 +101,9 @@ class Aset extends CI_Controller {
 		        $params['size'] = 10;
 		        $params['savename'] = FCPATH.$config['imagedir'].$image_name; 
 		        $this->ciqrcode->generate($params);
-
+		        // $volume_brg = $barang['volume_brg'];
 		        $volume = $this->input->post('volume');
+		 
 		        $harga = $this->input->post('harga');
 		        $total = ($volume*$harga);
 
@@ -111,19 +120,21 @@ class Aset extends CI_Controller {
 		        	'kondisi' => $this->input->post('kondisi'),
 		        	'umur_ekonomis' => $this->input->post('umur_ekonomis'),
 		        	'jenis_bantuan' => $this->input->post('jenis_bantuan'),
+		        	'date' => $this->input->post('date'),
 		        	'qr_code' => $image_name
 		        );
 
 		        $result = $this->ma->storeAset($data);
-
 		        if($result>=1){
 		        	$this->session->set_flashdata('sukses', 'Disimpan');
 		        	redirect('aset_wujud');
-		        }else{
+		        }
+		        
+		        else{
 		        	$this->session->set_flashdata('gagal', 'Disimpan');
 		        	redirect('aset_wujud/tambah');
 		        }
-
+		  
 			} else {
 
 				$id = $this->uuid->v4();
@@ -145,21 +156,22 @@ class Aset extends CI_Controller {
 		        	'status_aset' => 'Aktif',
 		        	'kondisi' => $this->input->post('kondisi'),
 		        	'umur_ekonomis' => $this->input->post('umur_ekonomis'),
-		        	'jenis_bantuan' => $this->input->post('jenis_bantuan')
+		        	'jenis_bantuan' => $this->input->post('jenis_bantuan'),
+		        	'date' => $this->input->post('date')
 		        );
 
 		        $result = $this->ma->storeAset($data);
-
 		        if($result>=1){
 		        	$this->session->set_flashdata('sukses', 'Disimpan');
 		        	redirect('aset_wujud');
-		        }else{
+		        }
+		        
+		        else{
 		        	$this->session->set_flashdata('gagal', 'Disimpan');
 		        	redirect('aset_wujud/tambah');
 		        }
-
-			}
-		} else {
+		    } }
+		    else {
 			$data = array(
 				'title' => 'Aset Berwujud',
 				'active_menu_open' => 'menu-open',
@@ -248,6 +260,7 @@ class Aset extends CI_Controller {
 		        	'kondisi' => $this->input->post('kondisi'),
 		        	'umur_ekonomis' => $this->input->post('umur_ekonomis'),
 		        	'jenis_bantuan' => $this->input->post('jenis_bantuan'),
+		        	'date' => $this->input->post('date'),
 		        	'qr_code' => $image_name
 		        );
 
@@ -285,6 +298,7 @@ class Aset extends CI_Controller {
 		        	'kondisi' => $this->input->post('kondisi'),
 		        	'umur_ekonomis' => $this->input->post('umur_ekonomis'),
 		        	'jenis_bantuan' => $this->input->post('jenis_bantuan'),
+		        	'date' => $this->input->post('date'),
 		        	'qr_code' => NULL
 		        );
 
@@ -430,6 +444,16 @@ class Aset extends CI_Controller {
 
 		echo json_encode($query);
 	}
+
+		public function cariKat()
+	{
+
+		$bar = $this->input->get('bar');
+		$query = $this->ma->searchKat($bar, 'nama_kategori');
+
+		echo json_encode($query);
+	}
+
 
 }
 

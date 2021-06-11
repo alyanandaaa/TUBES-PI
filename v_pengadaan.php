@@ -26,9 +26,6 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">
-          Data Pengajuan Barang
-        </h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -83,19 +80,20 @@
 
                         <?php if ($row['status']=='0'){ ?>
                           <span class="badge badge-danger">Belum Disetujui</span>
-                        <?php }
-                        else if ($row['status']=='1'){ ?>
+                        <?php }else if ($row['status']=='1'){ ?>
                           <span class="badge badge-success">Disetujui</span>
-                        <?php }
-                        else{ ?>
+                        <?php }else{ ?>
                           <span class="badge badge-danger">Ditolak</span>
                         <?php } ?>
                                          
                       </td>
                       <td>
-                        <a href="<?=base_url('pengadaan/detail/'.$row['id_pengadaan'])?>" class="btn btn-success btn-sm">
+                        <center><a href="<?=base_url('pengadaan/detail/'.$row['id_pengadaan'])?>" class="btn btn-success btn-sm">
                           <i class="fas fa-eye"></i>
                         </a>
+                        <a href="<?=base_url('pengadaan/hapus/'.$row['id_pengadaan'])?>" class="btn btn-danger btn-sm tombol-hapus">
+                          <i class="fas fa-trash"></i>
+                        </a></center>
                       </td>
                     </tr>
                   <?php endforeach ?>
@@ -129,12 +127,9 @@
                                          
                       </td>
                       <td>
-                        <a href="<?=base_url('pengadaan/detail/'.$row['id_pengadaan'])?>" class="btn btn-success btn-sm">
+                        <center><a href="<?=base_url('pengadaan/detail/'.$row['id_pengadaan'])?>" class="btn btn-success btn-sm">
                           <i class="fas fa-eye"></i>
-                        </a>
-                        <a href="<?=base_url('pengadaan/hapus/'.$row['id_pengadaan'])?>" class="btn btn-danger btn-sm tombol-hapus">
-                          <i class="fas fa-trash"></i>
-                        </a>
+                        </a></center>
                       </td>
                     </tr>
                   <?php endforeach ?>
@@ -144,10 +139,6 @@
             </div> 
           </div>
           <!-- /.card-body -->
-          <div class="card-footer">
-            
-          </div>
-          <!-- /.card-footer-->
     </div>
     <!-- /.card -->
 

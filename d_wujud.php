@@ -89,6 +89,11 @@
                       <td><?=$d['volume'] ?></td>
                   </tr>
                   <tr>
+                      <td width="100px">Tanggal Keluar</td>
+                      <td width="50px">:</td>
+                      <td><?=$d['date'] ?></td>
+                  </tr>
+                   <tr>
                       <td width="100px">Nilai Barang</td>
                       <td width="50px">:</td>
                       <td><?=rupiah($d['harga']);?></td>

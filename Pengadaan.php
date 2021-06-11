@@ -288,7 +288,7 @@ class Pengadaan extends CI_Controller {
 		$data['status'] = '2';
 		unset($data['id_pengadaan']);
 		$result = $this->mp->updatePengadaan($id_pengadaan,$data);
-		if($result>=1){
+		if($result=0){
 			$this->session->set_flashdata('sukses', 'Disetujui');
 			redirect('pengadaan');
 		}else{

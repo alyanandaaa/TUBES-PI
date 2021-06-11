@@ -24,7 +24,7 @@ class Home extends CI_Controller {
 			'hapuskan' => $this->ma->totalAsetHapuskan()
 		);
 		$this->load->view('layouts/header',$data);
-		$this->load->view('layouts/content',$data);
+		$this->load->view('layouts/index',$data);
 		$this->load->view('layouts/footer');
 	}
 

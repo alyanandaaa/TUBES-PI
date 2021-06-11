@@ -16,6 +16,16 @@ class ModelLaporan extends CI_Model {
 		return $query->result_array(); 
 	}
 
+	public function getPengadaanWujud($id_lokasi,$tahun_pengadaan)
+	{
+		$this->db->select('*');
+		$this->db->from('pengadaan');
+		$this->db->where('id_lokasi', $id_lokasi);
+		$this->db->where('tahun_pengadaan', $tahun_pengadaan);
+		$query = $this->db->get();
+		return $query->result_array(); 
+	}
+	
 	public function getAsetWujudExcel($id_lokasi,$tahun_perolehan)
 	{
 		$this->db->select('*');
@@ -88,7 +98,6 @@ class ModelLaporan extends CI_Model {
 		$this->db->from('pengadaan');
 		$this->db->where('id_lokasi', $id_lokasi);
 		$this->db->where('tahun_pengadaan', $tahun_pengadaan);
-		$this->db->where('status', '1');
 		$res = $this->db->get();
 		return $res->result_array();
 	}

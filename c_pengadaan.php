@@ -23,58 +23,7 @@
 
   <!-- Main content -->
   <section class="content">
-     <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Rekomendasi Pengadaan Aset</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                  <?php 
-                    $no=1; 
-                    $arr = array();
-
-                    foreach ($nilai as $row){
-                      $spek = ($row['nilai_spek']/$maxspek['maks_spek']);
-                      $kual = ($row['nilai_kualitas']/$maxkual['maks_kualitas']);
-                      $hrg = ($row['harga']/$minharga['min_harga']);
-                      $nilai = round(($spek*0.3)+($kual*0.3)+($hrg*0.4),3);
-                  
-                      $arr[] = '<b>'.$row['nama_aset'].'</b>';
-                    } 
-
-                    $output = max($arr);
-
-                    echo "<p>Berdasarkan hasil perhitungan, maka pemilihan aset terbaik untuk pengadaan  adalah ".$output;                
-                  ?>
-              </div>
-              <!-- /.card-body -->
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Rekomendasi Jumlah Pengadaan</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <select name="id_lokasi" class="id_lokasi form-control" required>
-                  <option value="">- Cari --</option>
-                  <?php foreach ($mt as $x): ?>
-                    <option><?=$x['nama_barang'];?> | Jumlah Kerusakan : <?=$x['jml_rusak'];?> <?=$x['satuan'];?></option>
-                  <?php endforeach ?>      
-                </select>
-              </div>
-              <!-- /.card-body -->
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- general form elements -->
+     
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Form Pengadaan Aset</h3>

@@ -12,6 +12,18 @@ class ModelBarang extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array(); 
 	}
+	
+	public function getBarangKategori($id_kategori)
+	{
+		$this->db->select('*');
+		$this->db->from('barang');
+		$this->db->where('id_kategori', $id_kategori);
+		$this->db->where('volume_brg !=', 0);
+		$this->db->where('volume_brg >', 0);
+		$query = $this->db->get();
+		return $query->result_array(); 
+
+	}
 
 	public function getDetailBarang($id_barang)
 	{

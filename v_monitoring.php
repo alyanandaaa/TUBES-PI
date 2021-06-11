@@ -25,11 +25,13 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
+         <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?>
         <h3 class="card-title">
           <a href="<?=base_url('monitoring/tambah')?>" class="btn btn-block bg-gradient-primary">
             Tambah Data
           </a>
         </h3>
+         <?php endif ?>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -38,6 +40,7 @@
               <i class="fas fa-times"></i></button>
             </div>
           </div>
+           <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?>
           <div class="card-body"> 
           <div class="table-responsive">
           <table id="example1" class="table table-bordered table-striped">
@@ -46,7 +49,7 @@
                 <th>No.</th>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
-                <th>Tahun Perolehan</th>
+                <th>Jenis Perolehan</th>
                 <th>Kondisi</th>
                 <th>Aksi</th>
               </tr>
@@ -62,7 +65,7 @@
                   <?=$row['kondisi'];?>                     
                 </td>
                 <td>
-                  <a href="<?=base_url('monitoring/detail/'.$row['id_monitoring'])?>" class="btn btn-success btn-sm">
+                  <center><a href="<?=base_url('monitoring/detail/'.$row['id_monitoring'])?>" class="btn btn-success btn-sm">
                     <i class="fas fa-eye"></i>
                   </a>
                   <a href="<?=base_url('monitoring/edit/'.$row['id_monitoring'])?>" class="btn btn-info btn-sm">
@@ -70,10 +73,45 @@
                   </a>
                   <a href="<?=base_url('monitoring/hapus/'.$row['id_monitoring'])?>" class="btn btn-danger btn-sm tombol-hapus">
                     <i class="fas fa-trash"></i>
-                  </a>
+                  </a></center>
                   </td>
                 </tr>
               <?php endforeach ?>
+
+              <?php else: ?>
+                <div class="card-body"> 
+          <div class="table-responsive">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Kode Aset</th>
+                <th>Nama Aset</th>
+                <th>Perolehan</th>
+                <th>Kondisi</th>
+                <th>Jenis Aset</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $no=1; foreach ($mt as $row): ?>               
+              <tr>
+                <td><?=$no++;?></td>
+                <td><?=$row['kode_aset'];?></td>
+                <td><?=$row['nama_barang'];?></td>
+                <td><?=$row['tahun_perolehan'];?></td>
+                <td>
+                  <?=$row['kondisi'];?>                     
+                </td>
+                <td><?=$row['jenis_aset'];?></td>
+                <td>
+                  <a href="<?=base_url('monitoring/detail/'.$row['id_monitoring'])?>" class="btn btn-success btn-sm">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  </td>
+                </tr>
+                <?php endforeach ?>
+                <?php endif ?>
             </tbody>
           </table>
           </div>           

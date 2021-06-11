@@ -39,7 +39,7 @@
                 <input type="hidden" name="id_monitoring" value="<?=$mt['id_monitoring']?>">
                 <div class="card-body">
                   <div class="form-group row">
-                    <label for="id_aset" class="col-sm-4 col-form-label">Kode Barang</label>
+                    <label for="id_aset" class="col-sm-4 col-form-label">Kode Aset</label>
                     <div class="col-sm-6">
                       <select name="id_aset" class="id_aset form-control" required>
                         <option value="">- Pilih --</option>
@@ -86,7 +86,7 @@
                     </div>
                   </div>  
                   <div class="form-group row">
-                    <label for="foto" class="col-sm-4 col-form-label">Foto Fisik Barang</label>
+                    <label for="foto" class="col-sm-4 col-form-label">Foto Fisik Aset</label>
                     <div class="col-sm-6">
                      <div class="input-group">
                       <div class="custom-file">
@@ -149,5 +149,3 @@
     });
   });
 </script>
-
-

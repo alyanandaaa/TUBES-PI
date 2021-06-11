@@ -266,13 +266,13 @@ class Laporan extends CI_Controller {
 		$tahun_pengadaan = $this->input->post('tahun_pengadaan');
 
 		$data = array(
-			'title' => 'Laporan Pengadaan',
+			'title' => 'Laporan Data Pengadaan',
 			'active_menu_lp' => 'menu-open',
 			'active_menu_lpr' => 'active',
-			'active_menu_lpnd' => 'active',
+			'active_menu_ast' => 'active',
 			'lokasi' => $this->ml->getLokasi(),
 			'lok' => $this->ml->getLokasiId($id_lokasi),
-			'pnd' => $this->ml->getPengadaan($id_lokasi,$tahun_pengadaan) 
+			'pnd' => $this->ml->getPengadaanWujud($id_lokasi,$tahun_pengadaan) 
 		);
 
 		if (count($data['pnd'])>0) {
@@ -283,6 +283,7 @@ class Laporan extends CI_Controller {
 			$this->session->set_flashdata('gagal', 'Ditemukan');
 		    redirect('laporan/pengadaan');
 		}
+
 	}
 
 	public function printPengadaan($id_lokasi,$tahun_pengadaan)

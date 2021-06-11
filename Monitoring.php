@@ -45,7 +45,7 @@ class Monitoring extends CI_Controller {
 
 	public function simpanMonitoring()
 	{
-		$config['upload_path'] = 'src/img/aset/'; 
+	$config['upload_path'] = 'src/img/aset/'; 
         $config['allowed_types'] = 'gif|jpg|png';  
         $config['encrypt_name'] = TRUE; 
 
@@ -141,17 +141,17 @@ class Monitoring extends CI_Controller {
 				}
 
 				$gbr = $this->upload->data();
-                //Compress Image
-                $config['image_library']='gd2';
-                $config['source_image']='src/img/aset/'.$gbr['file_name'];
-                $config['create_thumb']= FALSE;
-                $config['maintain_ratio']= FALSE;
-                $config['quality']= '60%';
-                $config['width']= 500;
-                $config['height']= 500;
-                $config['new_image']= 'src/img/aset/'.$gbr['file_name'];
-                $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
+                		//Compress Image
+                		$config['image_library']='gd2';
+               		 	$config['source_image']='src/img/aset/'.$gbr['file_name'];
+                		$config['create_thumb']= FALSE;
+                		$config['maintain_ratio']= FALSE;
+                		$config['quality']= '60%';
+                		$config['width']= 500;
+                		$config['height']= 500;
+                		$config['new_image']= 'src/img/aset/'.$gbr['file_name'];
+                		$this->load->library('image_lib', $config);
+                		$this->image_lib->resize();
 
                 $data = array(
                 	'id_aset' => $this->input->post('id_aset'),

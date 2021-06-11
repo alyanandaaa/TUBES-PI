@@ -116,6 +116,17 @@ class ModelAset extends CI_Model {
 		return $query->num_rows(); 
 	}
 
+       public function alert($id_barang)
+	{
+		$this->db->select('volume_brg');
+		$this->db->from('barang');
+		$this->db->where('id_barang', $id_barang);
+		$query = $this->db->get();
+		$data = array_shift($query->result_array());
+		return $data['volume_brg'];
+	}
+
+
 }
 
 /* End of file ModelAset.php */

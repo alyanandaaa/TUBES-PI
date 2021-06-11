@@ -89,7 +89,8 @@
                         <td width="100px">Status</td>
                         <td width="50px">:</td>
                         <td>
-                          <?php if ($d['status']=='0'){ ?>
+
+                       <?php if ($d['status']=='0'){ ?>
                           <span class="badge badge-danger">Belum Disetujui</span>
                         <?php }
                         else if ($d['status']=='1'){ ?>

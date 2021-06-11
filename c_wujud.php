@@ -63,7 +63,7 @@
                 </div>
               </div>
 
-              <div class="form-group row">
+             <div class="form-group row">
                 <label for="id_barang" class="col-sm-2 col-form-label">Nama Barang</label>
                 <div class="col-sm-6">
                   <select name="id_barang" class="form-control" required>

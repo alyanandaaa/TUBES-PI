@@ -50,7 +50,7 @@
                   <div class="form-group row">
                     <label for="kerusakan" class="col-sm-4 col-form-label">Kerusakan</label>
                     <div class="col-sm-6">
-                      <textarea name="kerusakan" class="textarea form-control" required></textarea>
+                        <textarea name="kerusakan" class="textarea form-control" required></textarea>
                     </div>
                   </div>
                   <div class="form-group row">

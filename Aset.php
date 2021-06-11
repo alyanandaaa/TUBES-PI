@@ -58,6 +58,8 @@ class Aset extends CI_Controller {
 		$this->load->view('layouts/footer');
 	}
 
+
+
 	public function simpanAset()
 	{
 		

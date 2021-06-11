@@ -27,7 +27,7 @@
             <!-- general form elements disabled -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Detail Aset</h3>
+                <h3 class="card-title">Detail Barang</h3>
               </div>
 
               <!-- /.card-header -->
@@ -76,6 +76,11 @@
                         <td><?=$d['volume'] ?></td>
                       </tr>
                       <tr>
+                      <td width="100px">Tanggal Keluar</td>
+                      <td width="50px">:</td>
+                      <td><?=$d['date'] ?></td>
+                     </tr>
+                      <tr>
                         <td width="100px">Nilai Barang</td>
                         <td width="50px">:</td>
                         <td><?=rupiah($d['harga']);?></td>
@@ -123,7 +128,7 @@
             <!-- general form elements disabled -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Detail Monitoring Barang</h3>
+                <h3 class="card-title">Detail Monitoring Aset</h3>
               </div>
 
               <!-- /.card-header -->
@@ -132,7 +137,7 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>FOTO BARANG</th>
+                      <th>FOTO ASET</th>
                       <th>KERUSAKAN</th>
                       <th>FAKTOR YANG MEMPENGARUHI</th>
                       <th>MONITORING</th>

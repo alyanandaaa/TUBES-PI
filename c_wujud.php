@@ -19,7 +19,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+      
     <div class="flash-data-gagal" data-flashdatagagal="<?=$this->session->flashdata('gagal');?>"></div>
 
     <!-- Main content -->
@@ -62,11 +62,15 @@
                   <input type="text" class="form-control" name="kode_aset" placeholder="0000/XXX/20XX" required autofocus>
                 </div>
               </div>
+
               <div class="form-group row">
                 <label for="id_barang" class="col-sm-2 col-form-label">Nama Barang</label>
                 <div class="col-sm-6">
-                  <select name="id_barang" class="js-example-basic-single form-control" required>
-                       
+                  <select name="id_barang" class="form-control" required>
+                    <option value="">- Pilih --</option>
+                    <?php foreach ($nbrg as $row): ?>
+                      <option value="<?=$row['id_barang'];?>"><?=$row['nama_barang'];?></option>
+                    <?php endforeach ?> 
                   </select>
                 </div>
               </div>
@@ -76,7 +80,7 @@
                   <input type="number" class="form-control" name="volume" min="0" placeholder="Masukan Volume.." required>
                 </div>
               </div>
-              <div class="form-group row">
+            <div class="form-group row">
                 <label for="satuan" class="col-sm-2 col-form-label">Satuan</label>
                 <div class="col-sm-6">
                   <select name="satuan" class="form-control" required>
@@ -121,7 +125,13 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="harga" class="col-sm-2 col-form-label">Nilai Barang</label>
+                <label for="teda" class="col-sm-2 col-form-label">Tanggal Keluar</label>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control" name="date" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="harga" class="col-sm-2 col-form-label">Harga Barang</label>
                 <div class="col-sm-6">
                   <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -158,7 +168,7 @@
               <a href="<?=base_url('aset_wujud')?>">
                 <button type="button" class="btn btn-danger">Kembali</button>
               </a>
-              <button type="submit" class="btn btn-info">Simpan</button>
+              <button type="submit" name="simpan" class="btn btn-info">Simpan</button>
             </div>
             <!-- /.card-footer -->
           </form>
@@ -174,6 +184,7 @@
     </section>
     <!-- /.content -->
   </div>
+  
   <!-- /.content-wrapper -->
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
   <script>
@@ -205,6 +216,37 @@
               results.push({
                 id: item.id_barang,
                 text: item.nama_barang
+              });
+            });
+            return {
+              results: results
+            };
+          }
+        }
+      });
+    });
+
+
+    $(document).ready(function() {
+      $('.js-example-basic-single-2').select2({
+        theme: "classic",
+        placeholder : '-- Pilih --',
+        ajax : {
+          url : "<?=base_url('aset_wujud/cari')?>" ,
+          dataType : 'json',
+          delay : 250,
+          data : function(params) {
+              return{
+                bar : params.term
+              };
+          },
+          processResults: function (data) {
+            var results = [];
+
+            $.each(data, function(index,item) {
+              results.push({
+                id: item.id_kategori,
+                text: item.nama_kategori
               });
             });
             return {

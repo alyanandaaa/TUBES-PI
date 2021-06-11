@@ -27,11 +27,13 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
+        <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?>
         <h3 class="card-title">
           <a href="<?=base_url('barang/tambah')?>" class="btn btn-block bg-gradient-primary">
             Tambah Barang
           </a>
         </h3>
+        <?php endif ?>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -42,6 +44,7 @@
             </button>
           </div>
         </div>
+        <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?>
           <div class="card-body">
             <div class="table-responsive">
               <table id="example1" class="table table-bordered table-striped">
@@ -50,29 +53,65 @@
                     <th>No.</th>
                     <th>Kategori</th>
                     <th>Nama</th>
-                    <th>Tahun Perolehan</th>
+                    <th>Volume</th>
+                    <th>Tanggal Masuk</th>
+                    <!-- <th>Harga</th>
+                    <th>Total Harga</th> -->
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php 
+                 <?php $no=1;
+                  foreach ($barang as $row): ?>
+                  <tr>
+                    <td><?=$no++;?></td>
+                    <td><?=$row['nama_kategori'];?></td>
+                    <td><?=$row['nama_barang'];?></td>
+                    <td><?=$row['volume_brg'];?></td>
+                    <td><?=$row['date_in'];?></td>
+                    <!-- <td><?=$row['harga'];?></td> -->
+                    <!-- <td>><?=rupiah($d['total_harga']);?></td> -->
+                    <td>
+                       <center><a href="<?=base_url('barang/edit/'.$row['id_barang'])?>" class="btn btn-info btn-sm">
+                          <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="<?=base_url('barang/hapus/'.$row['id_barang'])?>" class="btn btn-danger btn-sm tombol-hapus">
+                          <i class="fas fa-trash"></i>
+                        </a></center>
+                    </td>
+                  </tr>
+                  <?php endforeach ?>
+
+                  <?php else: ?>
+                              <div class="card-body">
+            <div class="table-responsive">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Kategori</th>
+                    <th>Nama</th>
+                    <th>Tanggal Masuk</th>
+                    <th>Volume</th>
+                    <!-- <th>Harga</th>
+                    <th>Total Harga</th>       -->              
+                  </tr>
+                </thead>
+                <tbody>
+                    <?php 
                   $no=1;
                   foreach ($barang as $row): ?>
                   <tr>
                     <td><?=$no++;?></td>
                     <td><?=$row['nama_kategori'];?></td>
                     <td><?=$row['nama_barang'];?></td>
-                    <td><?=$row['tahun_perolehan'];?></td>
-                    <td>
-                       <a href="<?=base_url('barang/edit/'.$row['id_barang'])?>" class="btn btn-info btn-sm">
-                          <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="<?=base_url('barang/hapus/'.$row['id_barang'])?>" class="btn btn-danger btn-sm tombol-hapus">
-                          <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
+                    <td><?=$row['volume_brg'];?></td>
+                    <td><?=$row['date_in'];?></td>
+                    <!-- <td><?=$row['harga'];?> -->
+                    <!-- <td>><?=rupiah($d['total_harga']);?></td> -->
                   </tr>
                   <?php endforeach ?>
+                <?php endif ?>  
                 </tbody>
               </table>
             </div>

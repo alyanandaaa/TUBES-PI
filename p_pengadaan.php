@@ -13,80 +13,107 @@
     <title>Data Aset</title>
   </head>
   <body>
-  	<meta http-equiv="REFRESH" content="5; url=<?=base_url('laporan/pengadaan')?>"> 
-  	<div class="container">
-  		<div class="row pt-4">
-  			<div class="col-md-2">
-          <img src="<?=base_url()?>src/img/logo/AdminLTELogo.png" class="kiri" alt="">    
+    <meta http-equiv="REFRESH" content="5; url=<?=base_url('laporan/pengadaan')?>"> 
+    <div class="container">
+      <div class="row pt-4">
+        <div class="col-md-2">
+              
         </div>
         <div class="col-md-10 text-center">
-          <h2>NAMA YAYASAN</h2>
-          <h3>NAMA SEKOLAH</h3>
-          <P>Alamat </P>
+          <h4><center>INFORMATION TECHNOLOGY LEARNING GROUP</center></h4>
+          <h4><center>UNIVERSITAS SUMATERA UTARA</center></h4>
+          <h4><center>FAKULTAS ILMU KOMPUTER DAN TEKNOLOGI INFORMASI</center></h4>
+          <P><center>Jl. Alumni no.3 Padang Bulan, Kec. Medan Baru, Kota Medan, Sumatera Utara 20155</center></P>
+          <p><center>Telp/Fax : 061-1234567 E-mail : itlgfasilkomusu@gmail.com</center></p>
         </div>
-  		</div>
-  		<hr style="border: 1px solid black;">
-  		<div class="row">
-  			<div class="col text-center">
-  				<strong>Aset <?=$lokasi['nama_lokasi']?></strong>
-  			</div>
-  		</div>
-  		<div class="row pt-3">
-  			<div class="col text-center">
-  				<table class="table table-bordered">
-  					<thead>
-  						<th>NO.</th>
-  						<th>NAMA</th>
-  						<th>VOLUME</th>
-  						<th>SATUAN</th>
-  						<th>HARGA (Rp.)</th>
-  						<th>JUMLAH (Rp.)</th>
-  					</thead>
-  					<tbody>
-  						<?php 
-  						$sum=0; 
-  						$no=1; 
-  							foreach ($pnd as $row): 
-  						$sum+=$row['volume']*$row['harga_satuan'];			
-  						?>		
-  						<tr>
-  							<td><?=$no++;?></td>
-  							<td><?=$row['nama_aset']?></td>
-  							<td><?=$row['volume']?></td>
-  							<td><?=$row['satuan']?></td>
-  							<td><?=laporan($row['harga_satuan'])?></td>
-  							<td><?=laporan($row['volume']*$row['harga_satuan'])?></td>
-  						</tr>
-  						<?php endforeach ?>
-  					</tbody>
-  					<tfoot>
-  						<tr>
-  							<td colspan="5"><b>Jumlah</b></td>
-  							<td><?=laporan($sum);?></td>
-  						</tr>
-  					</tfoot>
-  				</table>
-  			</div>
-  		</div>
-  		<div class="row pt-4">
-  			<div class="col-md-6">
-          <p>Mengetahui, </p>
-          <p class="ex1">Kepala Sekolah</p>
-          Nama Kepsek</br>
-          NIP. 
+      </div>
+      <hr style="border: 1px solid black;">
+      <div class="row">
+        <div class="col text-center">
+          <p></p>
+          <h4><center>Laporan Aset <?=$lokasi['nama_lokasi']?></center></h4>
+          <p></p>
         </div>
-        <div class="col-md-6 text-right">
-          <p>Tempat, <?=tgl_indo(date('Y-m-d'))?></p>
-          <p class="ex1">WK. Sapras</p>
-          Nama kepala</br>
-          NIP. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="row pt-3">
+        <div class="col text-center">
+          <center><table border="1" width="90%">
+            <thead>
+              <th><center>No.</center></th>
+              <th><center>Nama</center></th>
+              <th><center>Volume</center></th>
+              <th><center>Satuan </center> </th>
+              <th><center>Harga (Rp.)  </center></th>
+              <th><center>Jumlah (Rp.)</center></th>
+            </thead>
+            <tbody>
+              <?php 
+              $sum=0; 
+              $no=1; 
+                foreach ($pnd as $row): 
+              $sum+=$row['volume']*$row['harga_satuan'];    
+              ?>    
+              <tr>
+               <td><center><?=$no++;?></center></td>
+                <td><center><?=$row['nama_aset']?></center></td>
+                <td><center><?=$row['volume']?></center></td>
+                <td><center><?=$row['satuan']?></center></td>
+                <td><center><?=laporan($row['harga_satuan'])?></center></td>
+                <td><center><?=laporan($row['volume']*$row['harga_satuan'])?></center></td>
+              </tr>
+              <?php endforeach ?>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5"><b>Jumlah</b></td>
+                <td><center><?=laporan($sum);?></center></td>
+              </tr>
+            </tfoot>
+          </table></center>
         </div>
-  		</div> 			
-  	</div>
+      </div>
+      <br><br>
+      <div class="row pt-3">
+        <div class="col text-center">
+          <center><table border="0" width="80%">
+            
+            <tbody>    
+              <tr>
+              <td><center>Mengetahui,</center></td>
+              <td><center>Medan, <?=tgl_indo(date('Y-m-d'))?></center></td>
+            </tr>
+            <tr>
+                <td><center>Kepala Bidang Inventaris</center></td>
+                <td><center>Admin ITLG</center></td>
 
-  	<script>
-  		window.print();
-  	</script>
+              </tr>
+              <tr>
+                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              </tr>
+              <tr>
+                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              </tr>
+              <tr>
+                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              </tr>
+              <tr>
+                <td><center>Nabila Rizka</center></td>
+                <td><center>Alya Ananda</center></td>
+
+              </tr>
+              <tr>
+                <td><center>NIM. 181402022</center></td>
+                <td><center>NIM. 181402016</center></td>
+
+              </tr>
+              
+            </tbody>
+    <script>
+      window.print();
+    </script>
     
 
     <!-- Optional JavaScript -->

@@ -35,7 +35,7 @@
             </div>
         </div>
           <div class="card-body">
-            <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?> 
+            <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2' : ?> 
             <br/> 
             <?php endif ?>
             <div class="table-responsive">
@@ -62,21 +62,7 @@
                     <td><?=$row['tahun_pengadaan'];?></td>
                     <td>
 
-                      <!-- utk status di pejabat
-                      <?php if ($row['status']=='0'): ?>
-                        <a class="btn btn-primary btn-sm" href="<?=base_url('pengadaan/setujui/'.$row['id_pengadaan'])?>">
-                          <i class="fa fa-check"></i> Setujui
-                        </a>
-                        <a class="btn btn-danger btn-sm" href="<?=base_url('pengadaan/tolak/'.$row['id_pengadaan'])?>">
-                          <i class="fa fa-times"></i> Tolak
-                        </a>
-                         <?php else: ?>
-                          <?php if ($row['status']=='1'): ?>
-                            <span class="badge badge-success">Disetujui</span>
-                          <?php else: ?>
-                            <span class="badge badge-danger">Ditolak</span>
-                          <?php endif ?>
-                        <?php endif ?> -->
+                      
 
                         <?php if ($row['status']=='0'){ ?>
                           <span class="badge badge-danger">Belum Disetujui</span>

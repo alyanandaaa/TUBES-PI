@@ -27,11 +27,14 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
+        <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?>
         <h3 class="card-title">
-          <a href="<?=base_url('aset_wujud/tambah')?>" class="btn btn-block bg-gradient-primary">
+          <button type="button" data-toggle="modal" data-target="#modal-default" class="btn btn-block bg-gradient-primary">Tambah Barang</button>
+          <!--<a href="<?=base_url('aset_wujud/tambah')?>" class="btn btn-block bg-gradient-primary">
             Tambah Barang
-          </a>
+          </a> -->
         </h3>
+        <?php endif ?>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -41,42 +44,6 @@
             </div>
         </div>
           <div class="card-body">
-              <!-- <form action="<?=base_url('aset_wujud/filter')?>" method="POST">
-              <div class="row">
-                  <div class="col-3">
-                    <select name="id_kategori" class="form-control" required>
-                      <option value="">- Pilih Kategori --</option>
-                      <?php foreach ($kategori as $row): ?>
-                        <option value="<?=$row['id_kategori'];?>"><?=$row['kode_kategori'];?> - <?=$row['nama_kategori'];?></option>
-                      <?php endforeach ?>      
-                    </select>
-                  </div>
-                  <div class="col-3">
-                    <select name="tahun_perolehan" class="form-control" required>
-                        <option value="">- Tahun Perolehan --</option>
-                        <?php 
-                        for($i = 2010 ; $i <= date('Y'); $i++){
-                          echo "<option value='$i'>$i</option>";
-                        }
-                        ?>                          
-                    </select>
-                  </div>
-                  <div class="col-3">
-                    <select name="kondisi" class="form-control" required>
-                      <option value="">- Kondisi --</option>
-                      <option value="Baik">Baik</option>
-                      <option value="Renovasi">Renovasi</option>
-                      <option value="Rusak">Rusak</option>     
-                    </select>
-                  </div>
-                  <div class="col">
-                    <button type="submit" class="btn btn-block btn-outline-primary">Filter</button>
-                  </div>
-                  <div class="col">
-                    <button type="reset" class="btn btn-block btn-outline-danger">Reset</button>
-                  </div>              
-              </div>
-              </form>  --> 
             <br/>
             <div class="table-responsive">
                            <table id="example1" class="table table-bordered table-striped">
@@ -86,20 +53,23 @@
                   <th>Kode Barang</th>
                   <th>Nama</th>
                   <th>Volume</th>
+                  <th>Tanggal Keluar</th>
                   <th>Nilai Barang</th>
                   <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php $no=1; foreach ($aset as $row): ?>               
+                 <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?>
+                  <?php $no=1; foreach ($aset as $row): ?>              
                 <tr>
                   <td><?=$no++;?></td>
                   <td><?=$row['kode_aset'];?></td>
                   <td><?=$row['nama_barang'];?></td>
                   <td align="center"><?=$row['volume'];?></td>
+                  <td><?=$row['date'];?></td>
                   <td><?=rupiah($row['harga']);?></td>
                   <td>
-                    <a href="<?=base_url('aset_wujud/detail/'.$row['id_aset'])?>" class="btn btn-success btn-sm">
+                    <center><a href="<?=base_url('aset_wujud/detail/'.$row['id_aset'])?>" class="btn btn-success btn-sm">
                       <i class="fas fa-eye"></i>
                     </a>
                     <a href="<?=base_url('aset_wujud/edit/'.$row['id_aset'])?>" class="btn btn-info btn-sm">
@@ -107,10 +77,28 @@
                     </a>
                     <a href="<?=base_url('aset_wujud/hapus/'.$row['id_aset'])?>" class="btn btn-danger btn-sm tombol-hapus">
                       <i class="fas fa-trash"></i>
+                    </a></center>
+                  </td>
+                </tr>
+                <?php endforeach ?>
+
+                <?php else: ?>
+                  <?php $no=1; foreach ($aset as $row): ?>   
+                 <tr>
+                  <td><?=$no++;?></td>
+                  <td><?=$row['kode_aset'];?></td>
+                  <td><?=$row['nama_barang'];?></td>
+                  <td align="center"><?=$row['volume'];?></td>
+                  <td><?=$row['date'];?></td>
+                  <td><?=rupiah($row['harga']);?></td>
+                  <td>
+                    <a href="<?=base_url('aset_wujud/detail/'.$row['id_aset'])?>" class="btn btn-success btn-sm">
+                      <i class="fas fa-eye"></i>
                     </a>
                   </td>
                 </tr>
                 <?php endforeach ?>
+                <?php endif ?>  
                 </tbody>
               </table>
             </div>  
@@ -124,6 +112,46 @@
     <!-- /.card -->
 
   </section>
+
+  <?php 
+    $no++;
+    foreach ($kategori as $row): 
+      $kategori_id = $row['id_kategori'];
+
+    ?>
+
+  <div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Pilih Kategori</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" action="<?=base_url('aset_wujud/tambah')?>" autocomplete="off" method="post">
+            <div class="form-group">
+              <select name="id_kategori" class="js-example-basic-single form-control" required>
+                <option value="">- Pilih --</option>
+                   <?php foreach ($kategori as $row): ?>
+                      <option value="<?=$row['id_kategori'];?>"><?=$row['nama_kategori'];?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>  
+            <!-- /.card-body -->                
+          </div>
+          <div class="modal-footer content-between">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<?php endforeach ?>
+
   <!-- /.content -->
 </div>
 <script src="<?=base_url()?>src/backend/plugins/datatables/jquery.dataTables.js"></script>
@@ -137,3 +165,4 @@
     });
   });
 </script>
+

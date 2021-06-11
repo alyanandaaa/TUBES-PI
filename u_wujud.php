@@ -123,6 +123,12 @@
                 </div>
               </div>
               <div class="form-group row">
+                <label for="date" class="col-sm-2 col-form-label">Tanggal Keluar</label>
+                <div class="col-sm-6">
+                  <input type="date" value="<?=$row['date']?>" class="form-control" name="date"required>
+                </div>
+              </div>
+              <div class="form-group row">
                 <label for="harga" class="col-sm-2 col-form-label">Nilai Barang</label>
                 <div class="col-sm-6">
                   <div class="input-group mb-3">

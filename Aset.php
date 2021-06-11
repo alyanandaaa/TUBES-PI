@@ -103,7 +103,8 @@ class Aset extends CI_Controller {
 		        $params['size'] = 10;
 		        $params['savename'] = FCPATH.$config['imagedir'].$image_name; 
 		        $this->ciqrcode->generate($params);
-		        // $volume_brg = $barang['volume_brg'];
+		        
+			$id_barang = $this->input->post('id_barang');
 		        $volume = $this->input->post('volume');
 		 
 		        $harga = $this->input->post('harga');
@@ -112,7 +113,7 @@ class Aset extends CI_Controller {
 		        $data = array(
 		        	'id_aset' => $id_aset,
 		        	'kode_aset' => $kode_aset,
-		        	'id_barang' => $this->input->post('id_barang'),
+		        	'id_barang' => $id_barang,
 		        	'id_lokasi' => $this->input->post('id_lokasi'),
 		        	'volume' => $volume,
 		        	'satuan' => $this->input->post('satuan'),
@@ -126,8 +127,15 @@ class Aset extends CI_Controller {
 		        	'qr_code' => $image_name
 		        );
 
+		        $volume_brg = $this->ma->alert($id_barang);
+		        if ($volume_brg - $volume < 0) {
+		        	$this->session->set_flashdata('gagal', 'Disimpan');
+		        	redirect('aset_wujud/tambah');
+		        }
+
+		        else{
 		        $result = $this->ma->storeAset($data);
-		        if($result>=1){
+		        if($result>=1 && $volume_brg - $volume >= 0 ){
 		        	$this->session->set_flashdata('sukses', 'Disimpan');
 		        	redirect('aset_wujud');
 		        }
@@ -149,7 +157,7 @@ class Aset extends CI_Controller {
 				$data = array(
 					'id_aset' => $id_aset,
 		        	'kode_aset' => $this->input->post('kode_aset'),
-		        	'id_barang' => $this->input->post('id_barang'),
+		        	'id_barang' => $id_barang,
 		        	'id_lokasi' => $this->input->post('id_lokasi'),
 		        	'volume' => $volume,
 		        	'satuan' => $this->input->post('satuan'),
@@ -162,8 +170,15 @@ class Aset extends CI_Controller {
 		        	'date' => $this->input->post('date')
 		        );
 
+		        $volume_brg = $this->ma->alert($id_barang);
+		        if ($volume_brg - $volume < 0) {
+		        	$this->session->set_flashdata('gagal', 'Disimpan');
+		        	redirect('aset_wujud/tambah');
+		        }
+
+		        else{
 		        $result = $this->ma->storeAset($data);
-		        if($result>=1){
+		        if($result>=1 && $volume_brg - $volume >= 0 ){
 		        	$this->session->set_flashdata('sukses', 'Disimpan');
 		        	redirect('aset_wujud');
 		        }
